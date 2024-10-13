@@ -10,7 +10,8 @@
 library(Rmpi)
 library(doMPI)
 
-cl <- startMPIcluster(count=3)
+# set actual number -1 
+cl <- startMPIcluster(count=23)
 registerDoMPI(cl)
 x <- foreach(i=1:100, .combine="c") %dopar% {
   sqrt(i)
