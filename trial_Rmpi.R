@@ -10,12 +10,15 @@
 library(Rmpi)
 library(doMPI)
 
+ptm <- proc.time()
 # set actual number -1 
-cl <- startMPIcluster(count=23)
+cl <- startMPIcluster(count=96-1)
 registerDoMPI(cl)
-x <- foreach(i=1:100, .combine="c") %dopar% {
+setRngDoMPI(cl,seed=1234)
+x <- foreach(i=1:1000, .combine="c") %dopar% {
   sqrt(i)
 }
 closeCluster(cl)
 x
 write.csv(x, "x.csv")
+print(proc.time()-ptm)
