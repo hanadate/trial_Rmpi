@@ -15,7 +15,7 @@ ptm <- proc.time()
 cl <- startMPIcluster(count=104-1)
 registerDoMPI(cl)
 setRngDoMPI(cl,seed=1234)
-x <- foreach(i=1:1000, .combine="c") %dopar% {
+x <- foreach(i=1:300000, .combine="c") %dopar% {
   sqrt(i)
 }
 closeCluster(cl)
