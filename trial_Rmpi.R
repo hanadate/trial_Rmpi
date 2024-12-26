@@ -12,7 +12,7 @@ library(doMPI)
 
 ptm <- proc.time()
 # set actual number -1 
-cl <- startMPIcluster(count=96-1)
+cl <- startMPIcluster(count=104-1)
 registerDoMPI(cl)
 setRngDoMPI(cl,seed=1234)
 x <- foreach(i=1:1000, .combine="c") %dopar% {
