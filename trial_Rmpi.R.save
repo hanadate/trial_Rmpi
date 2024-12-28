@@ -14,16 +14,11 @@ ptm <- proc.time()
 # set actual number -1 
 cl <- startMPIcluster(count=104-1)
 registerDoMPI(cl)
-x <- foreach(i=1:8000, .combine="c") %dopar% {
+setRngDoMPI(cl,seed=1234)
+x <- foreach(i=1:30000, .combine="c") %dopar% {
   sqrt(i)
 }
 closeCluster(cl)
 x
 write.csv(x, "x.csv")
 print(proc.time()-ptm)
-
-# 104 threads
-# 1000: 30
-# 2000: 60
-# 4000: 140
-# 8000: 360
