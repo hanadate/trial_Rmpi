@@ -12,9 +12,9 @@ library(doMPI)
 
 ptm <- proc.time()
 # set actual number -1 
-cl <- startMPIcluster(count=104-1)
+cl <- startMPIcluster(count=56-1)
 registerDoMPI(cl)
-x <- foreach(i=1:8000, .combine="c") %dopar% {
+x <- foreach(i=1:100, .combine="c") %dopar% {
   sqrt(i)
 }
 closeCluster(cl)
