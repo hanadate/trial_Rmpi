@@ -17,7 +17,7 @@ tot.tasks <- 1000
 cl <- startMPIcluster(count=cores-1)
 registerDoMPI(cl)
 x <- foreach(i=1:tot.tasks, .combine="c",
-             .options.mpi=list(chunkSize=floor(tot.tasks/(2*cores)))) %dopar% {
+             .options.mpi=list(chunkSize=floor(tot.tasks/(2*getDoParWorkers())))) %dopar% {
   sqrt(i)
 }
 closeCluster(cl)
