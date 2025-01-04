@@ -12,9 +12,12 @@ library(doMPI)
 
 ptm <- proc.time()
 # set actual number -1 
-cl <- startMPIcluster(count=56-1)
+cores <- 56
+tot.tasks <- 1000
+cl <- startMPIcluster(count=cores-1)
 registerDoMPI(cl)
-x <- foreach(i=1:100, .combine="c") %dopar% {
+x <- foreach(i=1:tot.tasks, .combine="c",
+             .options.mpi=list(chunkSize=floor(tot.tasks/(2*cores)))) %dopar% {
   sqrt(i)
 }
 closeCluster(cl)
